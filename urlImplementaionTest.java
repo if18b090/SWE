@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class urlImplementaionTest {
-
+//Test for rawUrl()
     @Test
     public void rawUelTest01() {
         urlImplementaion object = new urlImplementaion("https://www.facebook.com/profile.php.php?a=1&b=2&c=3");
@@ -25,7 +25,7 @@ class urlImplementaionTest {
     }
 
 
-    //Test for the getPath()
+    //Test for  getPath()
     @Test
     public void pathTest01() {
         urlImplementaion object = new urlImplementaion("https://example.com/root/phpproj/test.php?a=1&b=2");
@@ -47,6 +47,7 @@ class urlImplementaionTest {
         Assertions.assertEquals("/root/desktop/test/", output);
     }
 
+   //Test for getParameter
     @Test
     void getParameterTest01() {
         urlImplementaion url = new urlImplementaion("https://example.com/root/desktop/test?a=1&b=2&c=3");
@@ -60,7 +61,7 @@ class urlImplementaionTest {
         Assertions.assertEquals("3", k2);
     }
 
-    //Funktion getParameterCount
+    //Test for getParameterCount
     @Test
     public void paramCountTest01() {
         urlImplementaion object = new urlImplementaion("/test.php?a=1");
@@ -75,7 +76,6 @@ class urlImplementaionTest {
         Assertions.assertEquals(3, output);
     }
 
-
     @Test
     public void paramCountTest03() {
         urlImplementaion object = new urlImplementaion("www.example.com/phpproj/test.php");
@@ -83,7 +83,7 @@ class urlImplementaionTest {
         Assertions.assertEquals(0, output);
     }
 
-    //Function getfilename
+    //Test for getfilename
     @Test
     public void fileNameTest01() {
         urlImplementaion object = new urlImplementaion("www.example.com/phpproj/first.php?");
@@ -106,7 +106,7 @@ class urlImplementaionTest {
         Assertions.assertEquals("index.php", output);
     }
 
-    //Function getExtension
+    //Test for getExtension
     @Test
     void extTest01() {
         urlImplementaion url = new urlImplementaion("https://example.com/root/phpproj/test?a=1&b=2&c=3#aa");
@@ -115,7 +115,7 @@ class urlImplementaionTest {
     }
 
 
-    //Funktion getFragment
+    //Test for getFragment
     @Test
     void fragmentTest01() {
         urlImplementaion url = new urlImplementaion("https://example.com");
@@ -129,7 +129,7 @@ class urlImplementaionTest {
         Assertions.assertEquals("bb", ext);
     }
 
-    //Segment
+    //Test for get Segment
     @Test
     void segmentTest01() {
         urlImplementaion url = new urlImplementaion("https://example.com/root/desktop/Ordner/test.php?a=1&b=2&c=3");
