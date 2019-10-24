@@ -36,7 +36,14 @@ public class urlImplementaion implements Url{
            }
            else
            {
-                if(doubleSlash > 0) //if there is a double slash (//) 
+               if(doubleSlash > 0 && qMark > 0) //if protocol and parameters available
+                {
+               String[] firstSplit = rawUrl.split("\\?");  // splits into two parts, where the ? is
+               String[] secondSplit = firstSplit[0].split("//"); // splits again into two parts
+               String[] Path = secondSplit[1].split("/", 2);
+               return "/" + Path[1]; //returns the second part of the second split
+                }
+                else if(doubleSlash > 0) //if there is a double slash (//)
                 {
                    String[] firstSplit = rawUrl.split("//"); //splits into two parts
                    String[] Path = firstSplit[1].split("/", 2);
@@ -48,13 +55,6 @@ public class urlImplementaion implements Url{
                    String[] Path = firstSplit[0].split("/", 2);
                    return "/" + Path[1]; //returns the second part of the split
                 }
-                else if(doubleSlash > 0 && qMark > 0) //if protocol and parameters available
-               {
-                   String[] firstSplit = rawUrl.split("\\?");  // splits into two parts, where the ? is
-                   String[] secondSplit = firstSplit[0].split("//"); // splits again into two parts
-                   String[] Path = secondSplit[1].split("/", 2);
-                   return "/" + Path[1]; //returns the second part of the second split
-               }
                return rawUrl; //if none of them, returns the rawUrl
            }          
         }
@@ -70,7 +70,7 @@ public class urlImplementaion implements Url{
             {
                 String[] param= rawUrl.split("\\?");
                 String[] pairs = param[1].split("&"); //A 2
-                for(int i=0; i<=pairs.length; i++ )
+                for(int i=0; i<pairs.length; i++ )
                 {
                     String[] p= pairs[i].split("=");
                     String key = "";
@@ -122,7 +122,7 @@ public class urlImplementaion implements Url{
 	 */
 	public String getFileName(){
             String[] getsegments = getSegments();
-            return getsegments[getsegments.length-1];  
+            return getsegments[getsegments.length-1];
         }
 
 	/**
@@ -160,5 +160,10 @@ public class urlImplementaion implements Url{
             {
                 return "";
             }
+        }
+
+        public static void main(String[] args)
+        {
+            System.out.println("Test");
         }
 }
