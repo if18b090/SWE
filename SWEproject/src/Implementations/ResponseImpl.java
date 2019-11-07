@@ -24,17 +24,17 @@ public class ResponseImpl implements Response {
     private Map<String, String> headers = new HashMap<>();
 
     //getting current date and time of the server
-    public static String getTime() {
+    private static String getTime() {
         Date d1 = new Date();
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/YYYY HH:mm z", Locale.GERMANY);
-        df.setTimeZone(TimeZone.getTimeZone("GMT"));
+        df.setTimeZone(df.getTimeZone().getDefault());
         String formattedDate = df.format(d1);
         return formattedDate;
     }
 
 
 
-    public ResponseImpl() throws IOException {
+    public ResponseImpl() {
         headers.put("Date", getTime());
         headers.put("Server", DEFAULT_SERVER_HEADER);
     }
@@ -128,7 +128,7 @@ public class ResponseImpl implements Response {
     public void setServerHeader(String server) {
         headers.put("Server", server);
     }
-//TODO
+
     @Override
     public void setContent(String content) {
         contentBytes = content.getBytes();
