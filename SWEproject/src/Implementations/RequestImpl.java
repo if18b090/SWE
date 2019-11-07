@@ -17,18 +17,17 @@ public class RequestImpl implements Request {
 
     private InputStream inputStream;
     private String method;
-    private String httpVer;
     private UrlImplementation url ;
     private Map<String, String>headers = new HashMap<>();
 
-    public RequestImpl(InputStream in) throws IOException, IllegalAccessException {
+    public RequestImpl(InputStream in) throws IOException {
         BufferedReader brReader = new BufferedReader(new InputStreamReader(in));
 
         String reader =brReader.readLine();
         String[] segments = reader.split(" ");
         method = segments[0].toUpperCase();
         url = new UrlImplementation(segments[1]);
-        httpVer = segments[2];
+
 
         while (reader != null && !reader.isEmpty()){
                 reader = brReader.readLine();

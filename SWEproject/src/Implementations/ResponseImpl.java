@@ -164,16 +164,17 @@ public class ResponseImpl implements Response {
             }
 
             StringBuilder builder = new StringBuilder();
-            builder.append("HTTP/1.1").append(getStatus()).append("\n");
-            builder.append("Content-Length: ").append(getContentLength()).append("\n");
+            builder.append("HTTP/1.1").append(getStatus()).append(System.getProperty("line.separator"));
+            builder.append("Content-Length: ").append(getContentLength()).append(System.getProperty("line.separator"));
 
             for (Map.Entry<String, String> entry : headers.entrySet()) {
-                builder.append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
+                builder.append(entry.getKey()).append(": ").append(entry.getValue()).append(System.getProperty("line.separator"));
             }
 
-            builder.append("\n");
+            builder.append(System.getProperty("line.separator"));
             network.write(builder.toString().getBytes());
             network.write(contentBytes);
+            network.flush();
 
         } catch (IOException | IllegalAccessException e) {
             e.printStackTrace();

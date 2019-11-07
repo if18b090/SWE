@@ -7,6 +7,7 @@ public class Server {
 
     private ServerSocket ss;
 
+
     public void runServer(int port) throws IOException{
 
         ss= new ServerSocket(port);
@@ -15,7 +16,6 @@ public class Server {
 
         while (!ss.isClosed()) {
             new Thread(new MultiThread(ss.accept())).start();
-
         }
     }
 }

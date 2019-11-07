@@ -1,0 +1,12 @@
+/out/production/SWEproject/Main.class
+/out/production/SWEproject/Implementations/MultiThread.class
+/out/production/SWEproject/Interfaces/Request.class
+/out/production/SWEproject/Implementations/RequestImpl.class
+/out/production/SWEproject/Tests/RequestImplTest.class
+/out/production/SWEproject/Interfaces/Response.class
+/out/production/SWEproject/Implementations/ResponseImpl.class
+/out/production/SWEproject/Tests/ResponseImplTest.class
+/out/production/SWEproject/Implementations/Server.class
+/out/production/SWEproject/Interfaces/Url.class
+/out/production/SWEproject/Implementations/UrlImplementation.class
+/out/production/SWEproject/Tests/urlImplementationTest.class
