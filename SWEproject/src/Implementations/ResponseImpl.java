@@ -138,7 +138,7 @@ public class ResponseImpl implements Response {
 
     @Override
     public void setContent(byte[] content) {
-        contentBytes = this.content.getBytes();
+        contentBytes = content;
         contentLength = contentBytes.length;
 
     }

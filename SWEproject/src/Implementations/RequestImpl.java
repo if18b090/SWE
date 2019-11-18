@@ -24,9 +24,11 @@ public class RequestImpl implements Request {
         BufferedReader brReader = new BufferedReader(new InputStreamReader(in));
 
         String reader =brReader.readLine();
-        String[] segments = reader.split(" ");
-        method = segments[0].toUpperCase();
-        url = new UrlImplementation(segments[1]);
+        if(reader != null && !reader.isEmpty()){
+            String[] segments = reader.split(" ");
+            method = segments[0].toUpperCase();
+            url = new UrlImplementation(segments[1]);
+        }
 
 
         while (reader != null && !reader.isEmpty()){
@@ -44,22 +46,21 @@ public class RequestImpl implements Request {
 
     @Override
     public boolean isValid() {
-
-        if(method.length() != 3){
+        if(method.length() < 3){
+            System.out.println(method);
             return false;
-        }
-        return true;
+        }else
+            return true;
     }
 
     @Override
-    public String getMethod() {
+    public String getMethod(){
         if(this.isValid()){
             return method;
         }else {
             return null;
         }
     }
-
 
     @Override
     public Url getUrl() {
