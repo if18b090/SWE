@@ -46,11 +46,12 @@ public class RequestImpl implements Request {
 
     @Override
     public boolean isValid() {
-        if(method.length() < 3){
-            System.out.println(method);
-            return false;
-        }else
+        if(method.getBytes().length >= 3){
             return true;
+        }else{
+            return false;
+        }
+
     }
 
     @Override
