@@ -30,7 +30,6 @@ public class MultiThread implements Runnable{
             if(!req.isValid()){
                 res.setStatusCode(400);
                 res.getStatus();
-                //res.setContent(Files.readAllBytes(Paths.get(System.getProperty("user.dir") + "/SWEproject/src/Resources/files/notFound.gif")));
                 clientSocket.close();
             }
             else {
