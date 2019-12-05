@@ -41,7 +41,7 @@ public class TempPlugin implements Plugin {
                 limit = 30;
             }
             System.out.println(getData(limit, offset));
-            res.setContent("<html><body><h1>Temperaturen: </h1><br>" + getData(limit, offset) + "</body></html>");
+            res.setContent("<html><body><h1 style='color:green'>Temperaturen: </h1><br>" + getData(limit, offset) + "</body></html>");
         }
         System.out.println("Result: " + res);
         return res;
@@ -49,16 +49,17 @@ public class TempPlugin implements Plugin {
 
 
     private String getData(int limit, int offset){
-        StringBuilder result = new StringBuilder("<table border='1!><tr><td><a>Id&nbsp;&nbsp;" +
-                "</a></td><td><a>Temperaturen&bnsp;&bnsp;" +
-                "</a></td><td><a>Datum&bnsp;&bnsp;</a></td></tr>");
+        StringBuilder result = new StringBuilder("<table><tr><td><a>Id&nbsp;&nbsp;" +
+                "</a></td><td><a>Temperaturen&nbsp;&nbsp;" +
+                "</a></td><td><a>Datum&nbsp;&nbsp;</a></td></tr>");
         Connection conn = null;
         PreparedStatement myquery = null;
         ResultSet resultSet = null;
 
         try {
+
             Class.forName("org.mariadb.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/temp?user=root&password=qNuOtNXJQaphcHaw");
+            conn =  DriverManager.getConnection("jdbc:mariadb://localhost:3306/temp?user=root&password=qNuOtNXJQaphcHaw");
             myquery = conn.prepareStatement("SELECT * FROM temp_table order by datum desc limit ? offset ?;");
             myquery.setInt(1, limit);
             myquery.setInt(2, offset);
@@ -76,7 +77,7 @@ public class TempPlugin implements Plugin {
                 result.append(resultSet.getString("datum"));
                 result.append("</a></td></tr>");
                 i++;
-                System.out.println("DB: " + resultSet);
+                //System.out.println("DB: " + result);
             }
             result.append("</table>");
             if(offset == 0){
@@ -127,7 +128,7 @@ public class TempPlugin implements Plugin {
                 result.append("</temp><date>");
                 result.append(resultSet.getString("datum"));
                 result.append("</date></entry>");
-                System.out.println("DB: " + result);
+                //System.out.println("DB: " + result);
             }
             result.append("</Temperaturen>");
 

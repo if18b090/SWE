@@ -34,7 +34,13 @@ public class PluginImpl implements Plugin {
     @Override
     public Response handle(Request req) {
         Response res = new ResponseImpl();
-        res.setContent("Test content");
+
+        String content = "<html>"
+                + "<body>"
+                + "<h1>Main Page\n"
+                + "</h1>";
+
+        res.setContent(content);
         return res;
     }
 }

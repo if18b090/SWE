@@ -16,7 +16,7 @@ public class MultiThread implements Runnable{
 
     private Socket clientSocket= null;
     private PluginManagerImpl PluginMgr = null;
-    private PluginImpl myPlugin = null;
+    private Plugin myPlugin = null;
     //private Url fileName;
     MultiThread(Socket _ClientSocket, PluginManagerImpl PlMgr){
         this.clientSocket= _ClientSocket;
@@ -27,13 +27,21 @@ public class MultiThread implements Runnable{
     @Override
     public void run()  {
         try {
+
             Request req = new RequestImpl(clientSocket.getInputStream());
-            myPlugin = (PluginImpl) PluginMgr.getPlugins();
+            myPlugin = PluginMgr.getBestPlugin(req);
             Response res = myPlugin.handle(req);
-            if(res == null){
-                res = new ResponseImpl();
-                res.setStatusCode(404);
+
+            if(!req.isValid()){
+                res.setStatusCode(400);
+                //res.getStatus();
+                clientSocket.close();
+            }else
+            {
+                res.setStatusCode(200);
+                res.setContentType("html");
             }
+
             res.send(clientSocket.getOutputStream());
             clientSocket.close();
 /*
