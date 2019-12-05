@@ -4,10 +4,13 @@ import Interfaces.Url;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.net.Socket;
 
 public class Server {
 
     private ServerSocket ss;
+    private Socket ClientSocket;
+    PluginManagerImpl PluginMgr = new PluginManagerImpl();
 
 
     public void runServer(int port) throws IOException{
@@ -17,7 +20,7 @@ public class Server {
         System.out.println("Waiting for client...");
 
         while (!ss.isClosed()) {
-            new Thread(new MultiThread(ss.accept())).start();
+            new Thread(new MultiThread(ss.accept(), PluginMgr)).start();
         }
     }
 }

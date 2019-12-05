@@ -1,6 +1,6 @@
 package Implementations;
 
-import Interfaces.Url;
+import Interfaces.*;
 import org.apache.commons.io.FilenameUtils;
 
 import java.io.File;
@@ -14,18 +14,29 @@ import static java.nio.file.Files.readAllBytes;
 
 public class MultiThread implements Runnable{
 
-    private Socket clientSocket;
+    private Socket clientSocket= null;
+    private PluginManagerImpl PluginMgr = null;
+    private PluginImpl myPlugin = null;
     //private Url fileName;
-    MultiThread(Socket _ClientSocket){
+    MultiThread(Socket _ClientSocket, PluginManagerImpl PlMgr){
         this.clientSocket= _ClientSocket;
+        this.PluginMgr = PlMgr;
         //this.fileName = fName;
     }
 
     @Override
     public void run()  {
         try {
-            RequestImpl req = new RequestImpl(clientSocket.getInputStream());
-            ResponseImpl res = new ResponseImpl();
+            Request req = new RequestImpl(clientSocket.getInputStream());
+            myPlugin = (PluginImpl) PluginMgr.getPlugins();
+            Response res = myPlugin.handle(req);
+            if(res == null){
+                res = new ResponseImpl();
+                res.setStatusCode(404);
+            }
+            res.send(clientSocket.getOutputStream());
+            clientSocket.close();
+/*
 
             if(!req.isValid()){
                 res.setStatusCode(400);
@@ -49,9 +60,12 @@ public class MultiThread implements Runnable{
                             "/SWEproject/src/Resources/files/" + req.getUrl().getFileName())));
                 }
 
+
+
             }
+
             res.send(clientSocket.getOutputStream());
-            //clientSocket.close();
+            //clientSocket.close();*/
 
             } catch (IOException ex) {
             ex.printStackTrace();
