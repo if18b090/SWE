@@ -67,24 +67,22 @@ public class UrlImplementation implements Url {
      */
     @Override
     public Map<String, String> getParameter(){
-        Map<String, String> parameters = new HashMap<>();
-        if(rawUrl.indexOf("?") > 0)
-        {
-            String[] param= rawUrl.split("\\?");
-            String[] pairs = param[1].split("&"); //A 2
-            for(int i=0; i<=pairs.length; i++ )
-            {
-                String[] p= pairs[i].split("=");
+        Map<String, String> params = new HashMap<>();
+        String parameters = rawUrl.substring(rawUrl.lastIndexOf("?") + 1);
+
+        if (parameters.length() > 1) {
+            for (String param : parameters.split("&")) {
+                String[] pair = param.split("=");
                 String key = "";
                 String value = "";
-                if(p.length > 1){
-                    key = p[0];
-                    value = p[1];
+                if(pair.length > 1){
+                    key = pair[0];
+                    value = pair[1];
                 }
-                parameters.put(key, value);
+                params.put(key, value);
             }
         }
-        return parameters;
+        return params;
     }
 
     /**

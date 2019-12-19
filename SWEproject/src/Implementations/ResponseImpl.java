@@ -158,8 +158,13 @@ public class ResponseImpl implements Response {
     @Override
     public void send(OutputStream network) {
 
+        System.out.println(contentBytes);
+        System.out.println(status);
         try {
-            if (status == null || contentBytes.length == 0) {
+            if ( status == null || contentBytes.length == 0) {
+                System.out.println("Hi222");
+                System.out.println(status);
+                System.out.println(contentBytes);
                 throw new IllegalAccessException("No status code or content.");
             }
 

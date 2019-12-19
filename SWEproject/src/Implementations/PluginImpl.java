@@ -4,6 +4,10 @@ import Interfaces.Plugin;
 import Interfaces.Request;
 import Interfaces.Response;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 public class PluginImpl implements Plugin {
 
     /**
@@ -17,8 +21,8 @@ public class PluginImpl implements Plugin {
 
     @Override
     public float canHandle(Request req) {
-        if(req.getUrl().getRawUrl().startsWith("/test/") || req.getUrl().getRawUrl().endsWith("/")){
-            return (float) 0.5;
+        if(req.getUrl().getRawUrl().startsWith("/")){
+            return (float) 1;
         }else {
             return 0;
         }
@@ -35,12 +39,12 @@ public class PluginImpl implements Plugin {
     public Response handle(Request req) {
         Response res = new ResponseImpl();
 
-        String content = "<html>"
-                + "<body>"
-                + "<h1>Main Page\n"
-                + "</h1>";
+            String content = "<html>"
+                    + "<body>"
+                    + "<h1>Main Page\n"
+                    + "</h1>";
+            res.setContent(content);
 
-        res.setContent(content);
         return res;
     }
 }

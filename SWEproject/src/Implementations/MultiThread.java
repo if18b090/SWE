@@ -65,6 +65,7 @@ public class MultiThread implements Runnable{
                     res.setStatusCode(200);
                     res.setContentType("html");
                     res.setContent(Files.readAllBytes(Paths.get(System.getProperty("user.dir") +
+                            "/SWEproject/src/Resources/files/" + req.getUrl().getFileName()))Files.readAllBytes(Paths.get(System.getProperty("user.dir") +
                             "/SWEproject/src/Resources/files/" + req.getUrl().getFileName())));
                 }
 

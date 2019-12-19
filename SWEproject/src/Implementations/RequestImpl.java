@@ -88,8 +88,14 @@ public class RequestImpl implements Request {
 
     @Override
     public int getContentLength() {
-        return Integer.parseInt(headers.get("Content-length"));
-    }
+
+        if(headers.containsKey("contetn-length")){
+            return Integer.parseInt(headers.get("Content-length"));
+        }else return 0;
+
+        }
+
+
 
     @Override
     public String getContentType() {
